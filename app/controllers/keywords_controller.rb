@@ -35,8 +35,8 @@ class KeywordsController < ApplicationController
 
     unless kw.empty? || @keyword != nil
       EM.synchrony do
-        #letters = ('a'..'z').to_a + ('0'..'9').to_a
-        letters = %w(a s)
+        letters = ('a'..'z').to_a + ('0'..'9').to_a
+        #letters = %w(a s)
         kw = URI.escape(kw)
         urls = letters.map { |l| "http://autosug.ebay.com/autosug?kwd=#{kw}%20#{l}&version=1279292363&_jgr=1&sId=0&_ch=0&callback=GH_ac_callback" }
 

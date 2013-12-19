@@ -1,20 +1,20 @@
-<p id="notice"><%= notice %></p>
+<div class="jumbotron">
+  You looked for
+  <h3><%= @keyword.value %></h3>
+  <p><%= @keyword.suggestion_count %> suggestions found.</p>
+</div>
 
 
-<%= @keyword.suggestion_count %> suggestions found.
+<% @keyword.suggestions.order(:value).each do |sug|%>
 
-<p>
-  <strong>Value:</strong>
-  <%= @keyword.value %>
-</p>
-
-<ul>
-  <% @keyword.suggestions.each do |sug|%>
-      <li><%= sug.value %></li>
-      <ul>
-        <% sug.variants.each do |v| %>
-            <li><%=v%></li>
-        <% end %>
-      </ul>
+<div class="list-group">
+  <a href="#" class="list-group-item active">
+    <%= sug.value %>
+  </a>
+  <% sug.variants.each do |v| %>
+      <a href="#" class="list-group-item"><%= v %></a>
   <% end %>
-</ul>
+
+</div>
+
+<% end %>

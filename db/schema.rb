@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131218131503) do
+ActiveRecord::Schema.define(version: 20131219121206) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,9 @@ ActiveRecord::Schema.define(version: 20131218131503) do
     t.string   "variants",   default: [], array: true
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "keyword_id"
   end
+
+  add_index "suggestions", ["keyword_id"], name: "index_suggestions_on_keyword_id", using: :btree
 
 end

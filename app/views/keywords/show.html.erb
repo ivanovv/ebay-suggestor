@@ -1,4 +1,8 @@
-<div class="jumbotron">
+<div style='padding-bottom: 200px;'>
+<%= render 'form' %>
+</div>
+
+<div id="results-count" class="jumbotron">
   You looked for
   <h3><%= @keyword.value %></h3>
   <p><%= @keyword.suggestion_count %> suggestions found.</p>

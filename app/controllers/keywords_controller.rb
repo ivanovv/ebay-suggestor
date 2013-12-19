@@ -29,7 +29,7 @@ class KeywordsController < ApplicationController
   # POST /keywords
   # POST /keywords.json
   def create
-    kw = keyword_params[:value]
+    kw = keyword_params[:value].downcase
     results = []
     @keyword = Keyword.find_by(:value => kw)
 
@@ -56,7 +56,7 @@ class KeywordsController < ApplicationController
 
     respond_to do |format|
       if @keyword.save
-        format.html { redirect_to @keyword }
+        format.html { render action: 'show' }
         format.json { render action: 'show', status: :created, location: @keyword }
       else
         format.html { render action: 'new' }

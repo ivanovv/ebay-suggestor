@@ -49,7 +49,13 @@ namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      execute :touch, release_path.join('tmp/restart.txt')
+      within release_path do
+        if test "[ -f #{fetch :unicorn_pid} ]"
+          execute :kill, "-USR2 `cat #{fetch :unicorn_pid}`"
+          else
+          execute  'bundle', 'exec', "unicorn_rails -Dc #{fetch(:unicorn_conf)} -E production)"
+        end
+      end
     end
   end
 
@@ -65,7 +71,11 @@ namespace :deploy do
   desc 'Stop application'
   task :stop do
     on roles(:app), in: :sequence, wait: 5 do
-      execute :touch, release_path.join('tmp/restart.txt')
+      within release_path do
+        if test "[ -f #{fetch(:unicorn_pid)} ]"
+          execute :kill, "-QUIT `cat #{fetch(:unicorn_pid)}`"
+        end
+      end
     end
   end
 

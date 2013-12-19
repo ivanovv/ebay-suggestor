@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="3962971641">
+    <data-source source="LOCAL" name="Rails ebay_suggest: development" uuid="c82e8c21-55a8-4ece-b3c2-b6a1fdd3df93">
+      <driver-ref>postgresql</driver-ref>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql:ebay_suggest_dev</jdbc-url>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails ebay_suggest: test" uuid="7ba66c23-804c-4eb4-ab3a-cae15ef81ca3">
+      <driver-ref>postgresql</driver-ref>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql:ebay_suggest_test</jdbc-url>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails ebay_suggest: production" uuid="98430437-39e8-4cd5-ac0a-7d1497da8d07">
+      <driver-ref>postgresql</driver-ref>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql:ebay_suggest_test</jdbc-url>
+      <libraries />
+    </data-source>
+  </component>
+</project>
+

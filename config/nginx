@@ -3,8 +3,7 @@ upstream unicorn_ebay_suggest {
 }
 
 server {
-  listen 80 default_server;
-
+  listen 80;
   server_name ebaysuggests.servehttp.com;
   root /home/deploy/apps/ebay_suggest/current/public;
   try_files $uri/index.html $uri @unicorn_ebay_suggest;

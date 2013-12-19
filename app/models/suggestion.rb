@@ -5,7 +5,7 @@ class Suggestion < ActiveRecord::Base
   def self.from_json json
     attributes = {
         :value => json['prefix'],
-        :variants => json['res']['sug']
+        :variants => json['res']? json['res']['sug'] : []
     }
     new attributes
   end

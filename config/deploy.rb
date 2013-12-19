@@ -6,14 +6,14 @@ fetch(:default_env).merge!(rails_env: :production)
 set :application, 'ebay_suggest'
 
 set :scm, :git
-set :repo_url, 'https://github.com/ivanovv/ebay_suggest.git'
+set :repo_url, 'https://github.com/ivanovv/ebay-suggestor.git'
 set :branch, 'master'
 
 set :deploy_to, '/home/deploy/apps/ebay_suggest/'
 
 set :log_level, :debug
 
-set :linked_files, %w{config/database.yml config/spider.yml config/initializers/secret_token.rb config/email.yml}
+set :linked_files, %w{config/database.yml}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 

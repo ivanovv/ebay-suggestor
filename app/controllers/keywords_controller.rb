@@ -41,7 +41,7 @@ class KeywordsController < ApplicationController
 
     EM.synchrony do
       multi = EM::Synchrony::Multi.new
-      letters = %w(a b)
+      letters = ('a'..'z').to_a + ('0'..'9').to_a
       kw = URI.escape(keyword_params[:value])
       urls = letters.map { |l| "http://autosug.ebay.com/autosug?kwd=#{kw}%20#{l}&version=1279292363&_jgr=1&sId=0&_ch=0&callback=GH_ac_callback" }
 
@@ -51,7 +51,7 @@ class KeywordsController < ApplicationController
       #data = multi.perform.responses[:callback].values.map(&:response)
       #binding.pry
 
-      EM::Synchrony::FiberIterator.new(urls, 2).each do |url|
+      EM::Synchrony::FiberIterator.new(urls, 7).each do |url|
         resp = EM::HttpRequest.new(url).get
         results.push resp.response
       end

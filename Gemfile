@@ -23,9 +23,14 @@ gem 'em-synchrony'
 gem 'em-http-request'
 
 group :development do
-  gem 'capistrano'
-  gem 'pry'
+  #gem 'sqlite3'
+  gem 'capistrano', '~> 3.0', require: false
+  gem 'capistrano-rails'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rbenv', '~> 2.0'
+  gem 'capistrano-rvm', '~> 0.1.0'
 end
+
 
 
 # Use debugger

@@ -56,7 +56,9 @@ namespace :deploy do
   desc 'Start application'
   task :start do
     on roles(:app), in: :sequence, wait: 5 do
-      execute fetch(:unicorn_start_cmd)
+      within release_path do
+        execute 'bundle', 'exec', "unicorn_rails -Dc #{fetch(:unicorn_conf)} -E production)"
+      end
     end
   end
 

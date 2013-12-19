@@ -21,6 +21,7 @@ gem 'jbuilder', '~> 1.2'
 gem 'unicorn'
 gem 'em-synchrony'
 gem 'em-http-request'
+gem 'bootstrap-sass', '~> 3.0.3.0'
 
 group :development do
   #gem 'sqlite3'
@@ -29,6 +30,7 @@ group :development do
   gem 'capistrano-bundler'
   gem 'capistrano-rbenv', '~> 2.0'
   gem 'capistrano-rvm', '~> 0.1.0'
+  gem 'rails_layout'
 end
 
 

@@ -1,12 +1,15 @@
 <p id="notice"><%= notice %></p>
 
+
+<%= @keyword.suggestion_count %> suggestions found.
+
 <p>
   <strong>Value:</strong>
   <%= @keyword.value %>
 </p>
 
 <ul>
-  <% @suggestions.each do |sug|%>
+  <% @keyword.suggestions.each do |sug|%>
       <li><%= sug.value %></li>
       <ul>
         <% sug.variants.each do |v| %>

@@ -1,7 +1,7 @@
-<%= form_for(@keyword) do |f| %>
+<%= form_for(@keyword, {:html => {:class =>'form'}}) do |f| %>
   <% if @keyword.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@keyword.errors.count, "error") %> prohibited this keyword from being saved:</h2>
+      <h2><%= pluralize(@keyword.errors.count, 'error') %> prohibited this keyword from being saved:</h2>
 
       <ul>
       <% @keyword.errors.full_messages.each do |msg| %>
@@ -11,11 +11,12 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :value %><br>
-    <%= f.text_field :value %>
+  <div class="form-group">
+    <%= f.label 'Your query', :class => 'control-label',  :for=> 'keyword_value' %><br>
+    <%= f.text_field :value, :class => 'form-control' %>
+    <span class="help-block">Enter the keyword to lookup suggestions for.</span>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+  <%= f.submit 'Get keywords', :class=> 'btn btn-default btn-primary' %>
+
 <% end %>

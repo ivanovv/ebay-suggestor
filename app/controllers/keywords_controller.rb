@@ -1,7 +1,6 @@
 require 'em-synchrony'
 require "em-synchrony/em-http"
 require "em-synchrony/fiber_iterator"
-require 'json'
 
 class KeywordsController < ApplicationController
   skip_before_filter :verify_authenticity_token
@@ -30,44 +29,34 @@ class KeywordsController < ApplicationController
   # POST /keywords
   # POST /keywords.json
   def create
-    #@suggestions = []
-    #s = 'vjo.darwin.domain.finding.autofill.AutoFill._do({"prefix":"ipad d","dict":"0","res":{"sug":["ipad dock","ipad digitizer","ipad damaged","ipad docking station","ipad defender case","ipad dock speaker","ipad decal","ipad data cable","ipad defender","ipad dummy"],"categories":[[176970,"iPad/Tablet/eBook Accessories"]]}})'
-    #json_string = s.match(/\._do\(([^\(]*)\)/)[1]
-    #json = JSON.parse json_string
-    #s = Suggestion.from_json json
-    #@suggestions << s
-
+    kw = keyword_params[:value]
     results = []
 
-    EM.synchrony do
-      multi = EM::Synchrony::Multi.new
-      letters = ('a'..'z').to_a + ('0'..'9').to_a
-      kw = URI.escape(keyword_params[:value])
-      urls = letters.map { |l| "http://autosug.ebay.com/autosug?kwd=#{kw}%20#{l}&version=1279292363&_jgr=1&sId=0&_ch=0&callback=GH_ac_callback" }
+    unless kw.empty?
+      EM.synchrony do
+        letters = ('a'..'z').to_a + ('0'..'9').to_a
+        kw = URI.escape(kw)
+        urls = letters.map { |l| "http://autosug.ebay.com/autosug?kwd=#{kw}%20#{l}&version=1279292363&_jgr=1&sId=0&_ch=0&callback=GH_ac_callback" }
 
-      #letters.each do |l|
-      #  multi.add l.to_sym, EM::HttpRequest.new("http://autosug.ebay.com/autosug?kwd=#{kw}%20#{l}&version=1279292363&_jgr=1&sId=0&_ch=0&callback=GH_ac_callback").aget
-      #end
-      #data = multi.perform.responses[:callback].values.map(&:response)
-      #binding.pry
-
-      EM::Synchrony::FiberIterator.new(urls, 7).each do |url|
-        resp = EM::HttpRequest.new(url).get
-        results.push resp.response
+        EM::Synchrony::FiberIterator.new(urls, 6).each do |url|
+          http = EM::HttpRequest.new(url).get
+          results.push http.response
+        end
+        EventMachine.stop
       end
-      puts "All done! Stopping event loop."
-      EventMachine.stop
     end
 
     @keyword = Keyword.new(keyword_params)
-    @suggestions = results.map do |resp|
-      json_string = resp.match(/\._do\(([^\(]*)\)/)[1]
-      json = JSON.parse json_string
-      Suggestion.from_json json
-    end
+    @keyword.suggestions = results.map { |resp| Suggestion.from_ebay_suggestion resp }
 
     respond_to do |format|
-      format.html { render action: 'show' }
+      format.html do
+        unless kw.empty?
+          render action: 'show'
+        else
+          render action: 'new'
+        end
+      end
       format.json { render json: @keyword.errors, status: :unprocessable_entity }
     end
 

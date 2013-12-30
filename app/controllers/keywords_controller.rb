@@ -29,7 +29,7 @@ class KeywordsController < ApplicationController
   # POST /keywords
   # POST /keywords.json
   def create
-    kw = keyword_params[:value].downcase
+    kw = keyword_params[:value].downcase.strip
     results = []
     @keyword = Keyword.find_by(:value => kw)
 

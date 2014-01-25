@@ -8,6 +8,25 @@
   <p><%= @keyword.suggestion_count %> suggestions found.</p>
 </div>
 
+<% suggestions_count = @keyword.suggestions_count %>
+
+<div id="suggestions-table">
+  <table class="table table-striped table-bordered table-hover table-condensed">
+    <tr>
+      <th>Keyword</th>
+      <th>Count</th>
+    </tr>
+
+    <% suggestions_count.each do |k,v| %>
+    <tr>
+      <td><%= k %></td>
+      <td><%= v %></td>
+    </tr>
+    <% end %>
+
+  </table>
+</div>
+
 
 <% @keyword.suggestions.order(:value).each do |sug|%>
 

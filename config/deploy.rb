@@ -17,7 +17,7 @@ set :linked_files, %w{config/database.yml}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 
-set :unicorn_conf, "config/unicorn.rb"
+set :unicorn_conf, "#{release_path}/config/unicorn.rb"
 set :unicorn_pid, "#{release_path}/tmp/pids/unicorn.pid"
 set :unicorn_start_cmd, "(cd #{release_path}; bundle exec unicorn_rails -Dc #{fetch(:unicorn_conf)} -E production)"
 

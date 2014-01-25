@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "Keyword suggestion tool &mdash; eBay suggest scraper &mdash; eBaysuggest" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "Keyword suggestion tool &mdash; eBay suggest scraper &mdash; eBaysuggest".html_safe %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Ebay Suggestor" %>">
     <meta name="author" content="Victor Ivanov">
     <%= stylesheet_link_tag "application", media: "all" %>

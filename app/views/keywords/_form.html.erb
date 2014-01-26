@@ -60,7 +60,7 @@
       <option value="日本語">日本語</option>
     </select>
     -->
-    <%= text_field_tag 'keyword[value]', '', :class => 'form-control' %>
+    <%= text_field_tag 'keyword[value]', @keyword.try(:value) || '', :class => 'form-control' %>
     <span class="help-block">Enter the keyword to lookup suggestions for.</span>
   </div>
 

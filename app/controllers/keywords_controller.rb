@@ -32,7 +32,7 @@ class KeywordsController < ApplicationController
     kw = keyword_params[:value].downcase.strip
     site_id = keyword_params[:site_id] || 0
     results = []
-    @keyword = Keyword.find_by(:value => kw)
+    @keyword = Keyword.find_by(:value => kw, :site_id => site_id)
 
     unless kw.empty? || @keyword != nil
       EM.synchrony do

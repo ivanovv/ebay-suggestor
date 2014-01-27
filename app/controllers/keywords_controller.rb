@@ -30,6 +30,7 @@ class KeywordsController < ApplicationController
   # POST /keywords.json
   def create
     kw = keyword_params[:value].downcase.strip
+    site_id = keyword_params[:site_id] || 0
     results = []
     @keyword = Keyword.find_by(:value => kw)
 
@@ -38,13 +39,12 @@ class KeywordsController < ApplicationController
         letters = ('a'..'z').to_a + ('0'..'9').to_a
         #letters = %w(a s)
         kw = URI.escape(kw)
-        urls = letters.map { |l| "http://autosug.ebay.com/autosug?kwd=#{kw}%20#{l}&version=1279292363&_jgr=1&sId=0&_ch=0&callback=GH_ac_callback" }
+        urls = letters.map { |l| "http://autosug.ebay.com/autosug?kwd=#{kw}%20#{l}&version=1279292363&_jgr=1&sId=#{site_id}&_ch=0&callback=GH_ac_callback" }
 
         EM::Synchrony::FiberIterator.new(urls, 6).each do |url|
           http = EM::HttpRequest.new(url).get
           results.push http.response
         end
-        puts 'EventMachine.stop'
         EventMachine.stop
       end
     end
@@ -97,6 +97,6 @@ class KeywordsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def keyword_params
-    params.require(:keyword).permit(:value)
+    params.require(:keyword).permit(:value, :site_id)
   end
 end

@@ -13,53 +13,32 @@
 
   <div class="form-group">
     <%= label_tag 'keyword_value', 'Your query', :class => 'control-label' %><br>
-    <!--
-    <select id="language" name="language" class="" style="width:173px;">
-      <option value="">Language</option>
-      <option value="Bulgarian">Bulgarian</option>
-      <option value="Catalan">Catalan</option>
-      <option value="Czech">Czech</option>
-      <option value="Danish">Danish</option>
-      <option value="Dutch">Dutch</option>
-      <option value="English/Australia">English/Australia</option>
-      <option value="English/Canada">English/Canada</option>
-      <option value="English/Malaysia">English/Malaysia</option>
-      <option value="English/New Zealand">English/New Zealand</option>
-      <option value="English/Singapore">English/Singapore</option>
-      <option value="English/South Africa">English/South Africa</option>
-      <option value="English/UK">English/UK</option>
-      <option value="English/USA" selected="selected">English/USA</option>
-      <option value="Finnish">Finnish</option>
-      <option value="French">French</option>
-      <option value="German">German</option>
-      <option value="German/Austria">German/Austria</option>
-      <option value="German/Switzerland">German/Switzerland</option>
-      <option value="Greek">Greek</option>
-      <option value="Hebrew">Hebrew</option>
-      <option value="Hungarian">Hungarian</option>
-      <option value="Indonesian">Indonesian</option>
-      <option value="Italian">Italian</option>
-      <option value="Lithuanian">Lithuanian</option>
-      <option value="Norwegian">Norwegian</option>
-      <option value="Polish">Polish</option>
-      <option value="Portuguese/Brasil">Portuguese/Brasil</option>
-      <option value="Portuguese/Portugal">Portuguese/Portugal</option>
-      <option value="Romanian">Romanian</option>
-      <option value="Russian">Russian</option>
-      <option value="Serbian">Serbian</option>
-      <option value="Slovak">Slovak</option>
-      <option value="Slovenian">Slovenian</option>
-      <option value="Spanish">Spanish</option>
-      <option value="Spanish/Argentina">Spanish/Argentina</option>
-      <option value="Spanish/Chile">Spanish/Chile</option>
-      <option value="Spanish/Colombia">Spanish/Colombia</option>
-      <option value="Spanish/Mexico">Spanish/Mexico</option>
-      <option value="Spanish/Peru">Spanish/Peru</option>
-      <option value="Swedish">Swedish</option>
-      <option value="Turkish">Turkish</option>
-      <option value="日本語">日本語</option>
+
+    <select id="keyword[site_id]" name="keyword[site_id]" class="" style="width:173px;">
+      <option value="">Site</option>
+      <option value="0">eBay United States</option>
+      <option value="2">eBay Canada (English)</option>
+      <option value="210">eBay Canada (French)</option>
+      <option value="3">eBay UK</option>
+      <option value="15">eBay Australia</option>
+      <option value="16">eBay Austria</option>
+      <option value="123">eBay Belgium (Dutch)</option>
+      <option value="23">eBay Belgium (French)</option>
+      <option value="71">eBay France	</option>
+      <option value="77">eBay Germany</option>
+      <option value="100">eBay Motors</option>
+      <option value="101">eBay Italy</option>
+      <option value="146">eBay Netherlands</option>
+      <option value="186">eBay Spain</option>
+      <option value="193">eBay Switzerland</option>
+      <option value="201">eBay Hong Kong</option>
+      <option value="203">eBay India</option>
+      <option value="205">eBay Ireland</option>
+      <option value="207">eBay Malaysia</option>
+      <option value="211">eBay Philippines</option>
+      <option value="212">eBay Poland</option>
+      <option value="216">eBay Singapore</option>
     </select>
-    -->
     <%= text_field_tag 'keyword[value]', @keyword.try(:value) || '', :class => 'form-control' %>
     <span class="help-block">Enter the keyword to lookup suggestions for.</span>
   </div>

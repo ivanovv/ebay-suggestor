@@ -40,6 +40,9 @@ class KeywordsController < ApplicationController
         #letters = %w(a s)
         kw = URI.escape(kw)
         urls = letters.map { |l| "http://autosug.ebay.com/autosug?kwd=#{kw}%20#{l}&version=1279292363&_jgr=1&sId=#{site_id}&_ch=0&callback=GH_ac_callback" }
+        items_url = "http://www.ebay.com/sch/i.html?_sacat=0&_from=R40&LH_BIN=1&_nkw=#{kw}&_ipg=200&rt=nc"
+        sold_items_url = "http://www.ebay.com/sch/i.html?_sacat=0&_from=R40&LH_BIN=1&LH_Complete=1&LH_Sold=1&_nkw=#{kw}&_ipg=200&rt=nc"
+        urls.unshift(items_url, sold_items_url)
 
         EM::Synchrony::FiberIterator.new(urls, 6).each do |url|
           http = EM::HttpRequest.new(url).get
@@ -51,7 +54,11 @@ class KeywordsController < ApplicationController
 
     unless @keyword
       @keyword = Keyword.new(keyword_params)
+      items = Suggestion.from_ebay_search('_items', results.shift)
+      sold_items = Suggestion.from_ebay_search('_sold_items', results.shift)
       @keyword.suggestions = results.map { |resp| Suggestion.from_ebay_suggestion resp }
+      @keyword.suggestions << items
+      @keyword.suggestions << sold_items
     end
 
     respond_to do |format|

@@ -22,6 +22,7 @@ gem 'unicorn'
 gem 'em-synchrony'
 gem 'em-http-request'
 gem 'bootstrap-sass', '~> 3.0.3.0'
+gem 'nokogiri'
 
 group :development do
   #gem 'sqlite3'

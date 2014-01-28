@@ -5,14 +5,15 @@ class Keyword < ActiveRecord::Base
 
   def suggestion_count
     result = 0
-    suggestions.each { |s| result += s.variants.count }
+    suggestions.real.each { |s| result += s.variants.count }
     result
   end
 
-  def suggestions_count
+  def suggestions_count(type)
     result = {}
     seed_keyword = self.value.split(' ')
-    suggestions.each do |s|
+    suggestions_by_type = self.suggestions.send(type)
+    suggestions_by_type.each do |s|
       s.variants.each do |v|
         keywords = v.split(' ') - seed_keyword
         keywords.each do |k|

@@ -15,7 +15,7 @@ class Keyword < ActiveRecord::Base
     suggestions_by_type = self.suggestions.send(type)
     suggestions_by_type.each do |s|
       s.variants.each do |v|
-        keywords = v.split(' ') - seed_keyword
+        keywords = v.split(/,\s*/) - seed_keyword
         keywords.each do |k|
           if result[k]
             result[k] = result[k] + 1

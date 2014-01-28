@@ -14,6 +14,7 @@ class Suggestion < ActiveRecord::Base
   def self.from_ebay_search(type, search_page)
     doc = Nokogiri::HTML(search_page)
     titles = doc.css('.ittl h3 a').map {|a| a.text.downcase}
+
     attributes = {
         :value => type,
         :variants => titles || []

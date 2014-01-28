@@ -13,7 +13,7 @@
 <div class="tab-content">
   <div class="tab-pane active" id="suggestions">
 
-    <div id="results-count" class="jumbotron">
+    <div class="jumbotron results-count">
       You looked for
       <h3><%= @keyword.value %></h3>
 
@@ -58,7 +58,7 @@
   </div>
   <div class="tab-pane" id="search">
 
-    <div id="results-count" class="jumbotron">
+    <div class="jumbotron results-count">
       You looked for
       <h3><%= @keyword.value %></h3>
       <p><%= @keyword.suggestions.items.first.variants.count %> on-sale products found.</p>

@@ -65,8 +65,6 @@ class KeywordsController < ApplicationController
           end
         end
       end
-      @keyword.suggestions << items
-      @keyword.suggestions << sold_items
     end
 
     respond_to do |format|

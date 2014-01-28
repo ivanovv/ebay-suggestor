@@ -2,12 +2,6 @@
 
 <div class="clearfix"></div>
 
-<div id="results-count" class="jumbotron">
-  You looked for
-  <h3><%= @keyword.value %></h3>
-
-  <p><%= @keyword.suggestion_count %> suggestions found.</p>
-</div>
 
 <% suggestions_count = @keyword.suggestions_count(:real) %>
 
@@ -18,6 +12,14 @@
 
 <div class="tab-content">
   <div class="tab-pane active" id="suggestions">
+
+    <div id="results-count" class="jumbotron">
+      You looked for
+      <h3><%= @keyword.value %></h3>
+
+      <p><%= @keyword.suggestion_count %> suggestions found.</p>
+    </div>
+
     <ul class="nav nav-tabs results">
       <li><a href="#suggestions-table" data-toggle="tab">Keyword table</a></li>
       <li><a href="#all-suggestions" data-toggle="tab">All suggestions</a></li>
@@ -55,6 +57,15 @@
     </div>
   </div>
   <div class="tab-pane" id="search">
+
+    <div id="results-count" class="jumbotron">
+      You looked for
+      <h3><%= @keyword.value %></h3>
+      <p><%= @keyword.suggestions.items.variants.count %> on-sale products were found.</p>
+      <p><%= @keyword.suggestions.sold_items.variants.count %> sold products were found.</p>
+    </div>
+
+
     <ul class="nav nav-tabs results">
       <li><a href="#items" data-toggle="tab">On-sale Items</a></li>
       <li><a href="#sold-items" data-toggle="tab">Sold Items</a></li>

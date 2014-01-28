@@ -46,7 +46,7 @@ class KeywordsController < ApplicationController
 
         EM::Synchrony::FiberIterator.new(urls, 6).each do |url|
           http = EM::HttpRequest.new(url).get
-          results.push http.response
+          results.push [url, http.response]
         end
         EventMachine.stop
       end
@@ -54,9 +54,17 @@ class KeywordsController < ApplicationController
 
     unless @keyword
       @keyword = Keyword.new(keyword_params)
-      items = Suggestion.from_ebay_search('_items', results.shift)
-      sold_items = Suggestion.from_ebay_search('_sold_items', results.shift)
-      @keyword.suggestions = results.map { |resp| Suggestion.from_ebay_suggestion resp }
+      @keyword.suggestions = results.map do |resp|
+        if resp.first =~ /autosug/
+          Suggestion.from_ebay_suggestion resp[1]
+        else
+          if resp.first =~ /LH_Complete/
+            Suggestion.from_ebay_search('_sold_items', resp[1])
+          else
+            Suggestion.from_ebay_search('_items', resp[1])
+          end
+        end
+      end
       @keyword.suggestions << items
       @keyword.suggestions << sold_items
     end

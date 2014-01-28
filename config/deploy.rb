@@ -53,7 +53,7 @@ namespace :deploy do
         if test "[ -f #{fetch :unicorn_pid} ]"
           execute :kill, "-USR2 `cat #{fetch :unicorn_pid}`"
           else
-          execute  'bundle', 'exec', "unicorn_rails -Dc #{fetch(:unicorn_conf)} -E production)"
+          execute  'bundle', 'exec', "unicorn_rails -Dc #{fetch(:unicorn_conf)} -E production"
         end
       end
     end
@@ -63,7 +63,7 @@ namespace :deploy do
   task :start do
     on roles(:app), in: :sequence, wait: 5 do
       within release_path do
-        execute 'bundle', 'exec', "unicorn_rails -Dc #{fetch(:unicorn_conf)} -E production)"
+        execute 'bundle', 'exec', "unicorn_rails -Dc #{fetch(:unicorn_conf)} -E production"
       end
     end
   end

@@ -23,7 +23,7 @@ class Keyword < ActiveRecord::Base
     iterator.each do |s|
       s.variants.each do |v|
         keywords = v.split(/\s+|[,\(\)!\/\*\[\]\{\};]/).reject{|a| a.empty?}
-        keywords.map! {|k| k = }
+        keywords.map! {|k| k.sub /\.\.\.$/, ''}
         keywords = keywords - seed_keyword - %w(- + ( ) & ! / " | * .)
         keywords.each do |k|
           if result[k]

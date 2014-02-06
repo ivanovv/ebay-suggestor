@@ -10,10 +10,17 @@ class Keyword < ActiveRecord::Base
   end
 
   def suggestions_count(type)
+    counter(self.suggestions.send(type), nil)
+  end
+
+  def all_keywords_count
+    counter(self.suggestions, 100)
+  end
+
+  def counter(iterator, record_count)
     result = {}
-    seed_keyword = self.value.split(' ') + ['-']
-    suggestions_by_type = self.suggestions.send(type)
-    suggestions_by_type.each do |s|
+    seed_keyword = self.value.split(' ')
+    iterator.each do |s|
       s.variants.each do |v|
         keywords = v.split(/\s+|[,\(\)!\/\*\.\[\]\{\};]/).reject{|a| a.empty?}
         keywords = keywords - seed_keyword - %w(- + ( ) & ! / " | * )
@@ -26,26 +33,7 @@ class Keyword < ActiveRecord::Base
         end
       end
     end
-    Hash[result.sort_by {|k, v| -v}]
-  end
-
-  def all_keywords_count
-    result = {}
-    seed_keyword = self.value.split(' ')
-    self.suggestions.each do |s|
-      s.variants.each do |v|
-        keywords = v.split(/\s+|[,\+\-\(\)&!\/"\|\*\.]/).reject{|a| a.empty?}
-        keywords = keywords - seed_keyword
-        keywords.each do |k|
-          if result[k]
-            result[k] = result[k] + 1
-          else
-            result[k] = 1
-          end
-        end
-      end
-    end
-    Hash[result.sort_by {|k, v| -v}.first(100)]
+    Hash[result.sort_by {|k, v| -v}.first(record_count)]
   end
 
 end

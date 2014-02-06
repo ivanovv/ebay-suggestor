@@ -10,7 +10,7 @@ class Keyword < ActiveRecord::Base
   end
 
   def suggestions_count(type)
-    counter(self.suggestions.send(type), nil)
+    counter(self.suggestions.send(type), 10000)
   end
 
   def all_keywords_count
@@ -23,6 +23,7 @@ class Keyword < ActiveRecord::Base
     iterator.each do |s|
       s.variants.each do |v|
         keywords = v.split(/\s+|[,\(\)!\/\*\[\]\{\};]/).reject{|a| a.empty?}
+        keywords.map! {|k| k = }
         keywords = keywords - seed_keyword - %w(- + ( ) & ! / " | * .)
         keywords.each do |k|
           if result[k]

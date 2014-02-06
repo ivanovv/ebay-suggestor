@@ -22,8 +22,8 @@ class Keyword < ActiveRecord::Base
     seed_keyword = self.value.split(' ')
     iterator.each do |s|
       s.variants.each do |v|
-        keywords = v.split(/\s+|[,\(\)!\/\*\.\[\]\{\};]/).reject{|a| a.empty?}
-        keywords = keywords - seed_keyword - %w(- + ( ) & ! / " | * )
+        keywords = v.split(/\s+|[,\(\)!\/\*\[\]\{\};]/).reject{|a| a.empty?}
+        keywords = keywords - seed_keyword - %w(- + ( ) & ! / " | * .)
         keywords.each do |k|
           if result[k]
             result[k] = result[k] + 1

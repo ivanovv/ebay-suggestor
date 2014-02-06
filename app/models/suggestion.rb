@@ -20,7 +20,7 @@ class Suggestion < ActiveRecord::Base
     new attributes
   end
 
-  def self.from_ebay_suggestion ebay_suggestion
+  def self.from_ebay_suggestion(ebay_suggestion)
     raw_json = ebay_suggestion.match(/\._do\(([^\(]*)\)/)[1]
     json = JSON.parse raw_json
     attributes = {

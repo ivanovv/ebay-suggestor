@@ -11,12 +11,12 @@ class Keyword < ActiveRecord::Base
 
   def suggestions_count(type)
     result = {}
-    seed_keyword = self.value.split(' ')
+    seed_keyword = self.value.split(' ') + ['-']
     suggestions_by_type = self.suggestions.send(type)
     suggestions_by_type.each do |s|
       s.variants.each do |v|
-        keywords = v.split(/\s+|[,\+\-\(\)&!\/"\|\*\.]/).reject{|a| a.empty?}
-        keywords = keywords - seed_keyword
+        keywords = v.split(/\s+|[,\(\)!\/\*\.\[\]\{\};]/).reject{|a| a.empty?}
+        keywords = keywords - seed_keyword - %w(- + ( ) & ! / " | * )
         keywords.each do |k|
           if result[k]
             result[k] = result[k] + 1

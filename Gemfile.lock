@@ -28,6 +28,12 @@ GEM
     addressable (2.3.5)
     arel (4.0.1)
     atomic (1.1.14)
+    awesome_print (1.2.0)
+    better_errors (1.1.0)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
+    binding_of_caller (0.7.2)
+      debug_inspector (>= 0.0.1)
     bootstrap-sass (3.0.3.0)
       sass (~> 3.2)
     builder (3.1.4)
@@ -38,6 +44,9 @@ GEM
     capistrano-bundler (1.1.1)
       capistrano (~> 3.0)
       sshkit (>= 1.2.0)
+    capistrano-chruby (0.1.1)
+      capistrano (~> 3.0)
+      sshkit (~> 1.3)
     capistrano-rails (1.1.1)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
@@ -47,6 +56,7 @@ GEM
     capistrano-rvm (0.1.1)
       capistrano (~> 3.0)
       sshkit (~> 1.2)
+    coderay (1.1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -55,6 +65,9 @@ GEM
       execjs
     coffee-script-source (1.6.3)
     cookiejar (0.3.0)
+    debug_inspector (0.0.2)
+    ebayr (0.0.7)
+      activesupport
     em-http-request (1.1.2)
       addressable (>= 2.3.4)
       cookiejar
@@ -158,13 +171,18 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  awesome_print
+  better_errors
+  binding_of_caller
   bootstrap-sass (~> 3.0.3.0)
   capistrano (~> 3.0)
   capistrano-bundler
+  capistrano-chruby
   capistrano-rails
   capistrano-rbenv (~> 2.0)
   capistrano-rvm (~> 0.1.0)
   coffee-rails (~> 4.0.0)
+  ebayr
   em-http-request
   em-synchrony
   jbuilder (~> 1.2)

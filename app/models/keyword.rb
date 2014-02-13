@@ -1,5 +1,6 @@
 class Keyword < ActiveRecord::Base
   has_many :suggestions, :dependent => :destroy
+  has_many :suggested_categories, :dependent => :destroy
   belongs_to :category
   validates :value, :presence => true
 

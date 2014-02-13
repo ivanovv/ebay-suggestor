@@ -36,11 +36,12 @@ main {
   @extend .container;
   background-color: white;
   padding-bottom: 80px;
-  width: 100%;
+  //width: 100%;
   margin-top: 51px; // accommodate the navbar
-  @media (min-width: 768px) {
-      max-width: 730px;
-    }
+  //@media (min-width: 768px) {
+  //    max-width: 730px;
+  //  }
+  //
   }
 
 section {

@@ -23,6 +23,7 @@ gem 'em-synchrony'
 gem 'em-http-request'
 gem 'bootstrap-sass', '~> 3.0.3.0'
 gem 'nokogiri'
+gem 'ebayr'
 
 group :development do
   #gem 'sqlite3'
@@ -31,7 +32,11 @@ group :development do
   gem 'capistrano-bundler'
   gem 'capistrano-rbenv', '~> 2.0'
   gem 'capistrano-rvm', '~> 0.1.0'
+  gem 'capistrano-chruby'
   gem 'rails_layout'
+  gem 'awesome_print'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 

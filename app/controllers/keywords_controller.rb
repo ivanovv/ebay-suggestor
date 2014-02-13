@@ -39,9 +39,10 @@ class KeywordsController < ApplicationController
     unless @keyword
       @keyword = Keyword.new(keyword_params)
       results = query_ebay(kw, site_id)
+      @keyword.suggested_categories = get_suggested_categories(kw)
       @keyword.suggestions = results.map {|resp| Suggestion.from_ebay_response *resp }
     end
-
+    logger.info @keyword.suggested_categories
     respond_to do |format|
       if @keyword.save
         format.html { render action: 'show' }
@@ -56,6 +57,15 @@ class KeywordsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_keyword
     @keyword = Keyword.find(params[:id])
+  end
+
+  def get_suggested_categories(query)
+    categories = Ebayr.call(:GetSuggestedCategories, {:query => query})
+    if categories[:ack] == 'Success'
+      categories = categories[:suggested_category_array][:suggested_category]
+      categories = [categories] unless categories.is_a? Array
+      categories.first(3).map { |c| SuggestedCategory.from_ebay_category(c[:category]) }
+    end
   end
 
   def query_ebay(kw, site_id)

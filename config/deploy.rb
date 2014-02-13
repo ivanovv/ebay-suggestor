@@ -1,6 +1,3 @@
-set :rbenv_type, :system
-set :rbenv_ruby, '2.0.0-p247'
-
 fetch(:default_env).merge!(rails_env: :production)
 
 set :application, 'ebay_suggest'
@@ -13,7 +10,7 @@ set :deploy_to, '/home/deploy/apps/ebay_suggest/'
 
 set :log_level, :debug
 
-set :linked_files, %w{config/database.yml}
+set :linked_files, %w{config/database.yml config/initializers/ebayr.ru}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 
@@ -91,8 +88,16 @@ namespace :deploy do
 
   after :finishing, 'deploy:cleanup'
 
-  after 'deploy:updated', 'deploy:nginx:symlink_config'
-  after 'deploy:updated', 'deploy:nginx:reload'
+#  after 'deploy:updated', 'deploy:nginx:symlink_config'
+#  after 'deploy:updated', 'deploy:nginx:reload'
+  
+  before 'deploy:updated', :config do 
+    on roles(:web) do
+      execute 'bundle', 'config', 'build.pg', '--with-pg-config=/usr/pgsql-9.3/bin/pg_config'
+    end
+  end
+  
+  after 'deploy:publishing', 'deploy:restart'
 
 end
 

@@ -2,15 +2,34 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.jumbotron {
+  padding: 15px;
+}
 
 .results-count.jumbotron {
-  padding: 15px;
-  margin-top: 20px;
   h3 {
     margin-top: 0;
-    display: inline;
+    .title {
+      display: inline;
+    }
   }
 }
+
+.suggested-categories {
+  .list-group-item {
+    font-size: 13px;
+  }
+}
+
+
+.form.well {
+  width: 100%;
+}
+.form.well.new {
+  width: 50%;
+}
+
+
 .nav.nav-tabs.results {
   margin-bottom: 15px;
   margin-top: 20px;

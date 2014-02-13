@@ -61,6 +61,7 @@ class KeywordsController < ApplicationController
 
   def get_suggested_categories(query)
     categories = Ebayr.call(:GetSuggestedCategories, {:query => query})
+    logger.info categories
     if categories[:ack] == 'Success'
       categories = categories[:suggested_category_array][:suggested_category]
       categories = [categories] unless categories.is_a? Array

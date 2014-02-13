@@ -5,7 +5,7 @@ user('deploy')
 timeout 40
 app_path = '/home/deploy/apps/ebay_suggest/current'
 
-listen "/tmp/unicorn_ebay_suggest.sock"
+listen "192.30.161.48:5000"
 working_directory app_path
 pid "#{app_path}/tmp/pids/unicorn.pid"
 stderr_path "#{app_path}/log/unicorn.stderr.log"

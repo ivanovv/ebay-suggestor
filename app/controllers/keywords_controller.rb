@@ -36,6 +36,10 @@ class KeywordsController < ApplicationController
     site_id = keyword_params[:site_id] || 0
 
     @keyword = Keyword.find_by(:value => kw, :site_id => site_id)
+    if @keyword.created_at < 24.hours.ago
+      @keyword.destroy
+      @keyword = nil
+    end
     unless @keyword
       @keyword = Keyword.new(keyword_params)
       results = query_ebay(kw, site_id)

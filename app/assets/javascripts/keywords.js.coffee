@@ -11,6 +11,10 @@ jQuery ($) ->
     $(".counter .user-input").toggleClass("red", val.length > 79)
 
   $keyword.keyup =>
+    val = $keyword.val()
+    $(".counter .user-input").text(val.length)
+    $(".counter .user-input").toggleClass("red", val.length > 79)
+
     val = $.trim($keyword.val())
     if val != ''
       $keyword.parent().removeClass 'has-error'

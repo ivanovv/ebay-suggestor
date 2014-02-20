@@ -1,18 +1,20 @@
-<%= form_tag('/', {:method => :post, :class => "form well #{@form_class}"}) do |f| %>
-    <% if @keyword.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@keyword.errors.count, 'error') %> prohibited this keyword from being saved:</h2>
+<%= form_tag('/', {:method => :post, :class => "form-horizontal well #{@form_class}"}) do |f| %>
+  <% if @keyword.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@keyword.errors.count, 'error') %> prohibited this keyword from being saved:</h2>
 
-          <ul>
-            <% @keyword.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
+      <ul>
+        <% @keyword.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-    <div class="form-group">
-      <label for="keyword[site_id]">eBay site</label>
+  <div class="form-group">
+    <label for="keyword[site_id]" class="col-sm-2 control-label">eBay site</label>
+
+    <div class="col-sm-6">
       <select id="keyword[site_id]" name="keyword[site_id]" class="form-control" style="width:173px;">
         <option value="0">eBay United States</option>
         <option value="2">eBay Canada (English)</option>
@@ -39,20 +41,32 @@
         <option value="100">eBay Motors</option>
       </select>
     </div>
+  </div>
 
-    <div class="form-group">
-      <%= label_tag 'keyword_value', 'Your query', :class => 'control-label' %>
-      <br>
-      <%= text_field_tag 'keyword[value]', @keyword.try(:value) || '', :class => 'form-control' %>
+  <div class="form-group">
+    <%= label_tag 'title', 'Title', :class => 'col-sm-2 control-label' %>
+    <div class="col-sm-10">
+      <%= text_area_tag 'title', @title||'', :rows => 2, :class => 'form-control' %>
       <span class="help-block">
-        Enter the keyword to lookup suggestions for.
-        <br>
         <span class="counter">
-          <span class="user-input badge">0</span> characters / <span class="badge" style="background-color: #5cb85c;">80</span> characters
+          <span class="user-input badge"><%= (@keyword.try(:value)||'').size %></span> characters / <span class="badge" style="background-color: #5cb85c;">80</span> characters
         </span>
       </span>
     </div>
+  </div>
 
-    <%= submit_tag 'Get keywords', :class => 'btn btn-default btn-primary' %>
+  <div class="form-group">
+    <%= label_tag 'keyword_value', 'Your query', :class => 'col-sm-2 control-label' %>
+    <div class="col-sm-10">
+      <%= text_field_tag 'keyword[value]', @keyword.try(:value) || '', :class => 'form-control' %>
+      <span class="help-block">
+        Enter the keyword to lookup suggestions for.
+      </span>
+    </div>
+  </div>
+
+  <%= submit_tag 'Get keywords', :class => 'btn btn-default btn-primary' %>
 
 <% end %>
+
+

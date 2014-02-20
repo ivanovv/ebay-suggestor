@@ -32,6 +32,7 @@ class KeywordsController < ApplicationController
   # POST /keywords.json
   def create
     @show_tables = session[:show_tables]
+    @title = params[:title]
     kw = keyword_params[:value].downcase.strip
     site_id = keyword_params[:site_id] || 0
 

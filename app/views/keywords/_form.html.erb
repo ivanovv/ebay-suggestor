@@ -44,7 +44,13 @@
       <%= label_tag 'keyword_value', 'Your query', :class => 'control-label' %>
       <br>
       <%= text_field_tag 'keyword[value]', @keyword.try(:value) || '', :class => 'form-control' %>
-      <span class="help-block">Enter the keyword to lookup suggestions for.</span>
+      <span class="help-block">
+        Enter the keyword to lookup suggestions for.
+        <br>
+        <span class="counter">
+          <span class="user-input badge">0</span> characters / <span class="badge" style="background-color: #5cb85c;">80</span> characters
+        </span>
+      </span>
     </div>
 
     <%= submit_tag 'Get keywords', :class => 'btn btn-default btn-primary' %>

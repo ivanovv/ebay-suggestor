@@ -4,8 +4,15 @@
 
 jQuery ($) ->
   $keyword = $ '#keyword_value'
+
+  $keyword.keydown =>
+    val = $keyword.val()
+    $(".counter .user-input").text(val.length)
+    $(".counter .user-input").toggleClass("red", val.length > 79)
+
   $keyword.keyup =>
-    if $.trim($keyword.val()) != ''
+    val = $.trim($keyword.val())
+    if val != ''
       $keyword.parent().removeClass 'has-error'
 
 
